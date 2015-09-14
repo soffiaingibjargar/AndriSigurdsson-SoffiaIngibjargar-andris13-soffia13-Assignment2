@@ -15,7 +15,7 @@ public class RectangleGraphic {
 
 	public static void create(int vertexPointer) {
 		RectangleGraphic.vertexPointer = vertexPointer;
-		
+		/*
 		//VERTEX ARRAY IS FILLED HERE
 		float[] array = {-0.50f, -0.50f,
 						-0.50f, 0.50f,
@@ -24,10 +24,19 @@ public class RectangleGraphic {
 
 		vertexBuffer = BufferUtils.newFloatBuffer(8);
 		vertexBuffer.put(array);
-		vertexBuffer.rewind();
+		vertexBuffer.rewind();*/
 	}
 	
-	public static void drawSolidSquare() {
+	public static void drawSolidSquare(float x0, float y0, float x, float y) {
+		//VERTEX ARRAY IS FILLED HERE
+				float[] array = {x0, y0,
+								x0, y,
+								x, y,
+								x, y0};
+
+				vertexBuffer = BufferUtils.newFloatBuffer(8);
+				vertexBuffer.put(array);
+				vertexBuffer.rewind();
 		
 		Gdx.gl.glVertexAttribPointer(vertexPointer, 2, GL20.GL_FLOAT, false, 0, vertexBuffer);
 		Gdx.gl.glDrawArrays(GL20.GL_TRIANGLE_FAN, 0, 4);

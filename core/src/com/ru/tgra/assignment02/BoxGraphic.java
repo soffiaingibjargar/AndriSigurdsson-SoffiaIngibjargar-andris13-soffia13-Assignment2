@@ -7,7 +7,19 @@ public class BoxGraphic {
 	ModelMatrix orientation;
 	ArrayList<Box> boxes;
 	
-	public BoxGraphic() {
+	public BoxGraphic() 
+	{
+		orientation = new ModelMatrix();
+		orientation.loadIdentityMatrix();
 		
+		boxes = new ArrayList<Box>();
+	}
+	
+	public void display(int colorLoc)
+	{
+		ModelMatrix.main.pushMatrix();
+		ModelMatrix.main.addTransformation(orientation.matrix);
+		
+		ModelMatrix.main.popMatrix();
 	}
 }

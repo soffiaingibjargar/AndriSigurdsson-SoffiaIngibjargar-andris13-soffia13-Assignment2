@@ -92,7 +92,6 @@ public class Assignment02Game extends ApplicationAdapter {
 		
 		//SincGraphic.create(positionLoc);
 		//CoordFrameGraphic.create(positionLoc);
-		boxes = new Box();
 		cannon = new Cannon();
 		ModelMatrix.main = new ModelMatrix();
 		ModelMatrix.main.loadIdentityMatrix();

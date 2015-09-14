@@ -18,11 +18,7 @@ public class Cannon {
 		velocity = new Vector3D(0, 0, 0);
         balls = new ArrayList<CannonBall>();
 		
-		box = new Box();
-		box.x0 = -0.50f;
-		box.y0 = -0.50f;
-		box.x = 0.50f;
-		box.y = 0.50f;
+		box = new Box(-0.50f, -0.50f, 0.50f, 0.50f);
 	}
 	
 	public void update(float deltaTime)

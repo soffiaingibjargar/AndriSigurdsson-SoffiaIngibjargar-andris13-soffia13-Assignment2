@@ -15,16 +15,7 @@ public class RectangleGraphic {
 
 	public static void create(int vertexPointer) {
 		RectangleGraphic.vertexPointer = vertexPointer;
-		/*
-		//VERTEX ARRAY IS FILLED HERE
-		float[] array = {-0.50f, -0.50f,
-						-0.50f, 0.50f,
-						0.50f, 0.50f,
-						0.50f, -0.50f};
-
 		vertexBuffer = BufferUtils.newFloatBuffer(8);
-		vertexBuffer.put(array);
-		vertexBuffer.rewind();*/
 	}
 	
 	public static void drawSolidSquare(Box box) {
@@ -34,7 +25,6 @@ public class RectangleGraphic {
 								box.x, box.y,
 								box.x, box.y0};
 
-				vertexBuffer = BufferUtils.newFloatBuffer(8);
 				vertexBuffer.put(array);
 				vertexBuffer.rewind();
 		

@@ -32,7 +32,6 @@ public class Cannon {
 		//Rotation for the cannon
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && (orientation.getB().y > 0 || orientation.getB().x > 0)) {
 			orientation.addRotationZ(90.0f * deltaTime);
-			System.out.println(orientation.getB().x);
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && (orientation.getB().y > 0 || orientation.getB().x < 0)) {
 			orientation.addRotationZ(-90.0f * deltaTime);

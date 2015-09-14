@@ -6,11 +6,15 @@ public class CannonBall {
 	
 	public ModelMatrix orientation;
 	public Vector3D velocity;
-	public boolean visible = false;
-	
-	public CannonBall()
+
+	public CannonBall(ModelMatrix orientation)
 	{
-		
+		this.orientation = new ModelMatrix();
+		this.orientation.loadIdentityMatrix();
+		this.orientation.addTransformation(orientation.matrix);
+		this.orientation.addTranslation(0, 50.0f, 0);
+		velocity = orientation.getB();
+		velocity.scale(200.0f);
 	}
 	
 	public void update(float deltaTime)
@@ -18,16 +22,15 @@ public class CannonBall {
 		orientation.AddTranslationBaseCoords(velocity.x * deltaTime, velocity.y * deltaTime, 0);
 	}
 	
-	public void display(int colorLoc)
+	public void display(int colorLoc, float deltaTime)
 	{
+        update(deltaTime);
 		ModelMatrix.main.pushMatrix();
-		
 		ModelMatrix.main.addTransformation(orientation.matrix);
 		Gdx.gl.glUniform4f(colorLoc, 1.0f, 1.0f, 0.0f, 1);
 		ModelMatrix.main.addScale(9.0f, 9.0f, 1.0f);
 		ModelMatrix.main.setShaderMatrix();
 		CircleGraphic.drawSolidCircle();
-		
 		ModelMatrix.main.popMatrix();
 	}
 

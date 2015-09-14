@@ -120,9 +120,11 @@ public class Assignment02Game extends ApplicationAdapter {
 		
 		ModelMatrix.main.loadIdentityMatrix();
 		ModelMatrix.main.setShaderMatrix(modelMatrixLoc);
+		float deltaTime = Gdx.graphics.getDeltaTime();
+
 		
 		boxGraphic.display(colorLoc);
-		cannon.display(colorLoc);
+		cannon.display(colorLoc, deltaTime);
 		
 	}
 

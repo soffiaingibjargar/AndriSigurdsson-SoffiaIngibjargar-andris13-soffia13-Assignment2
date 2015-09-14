@@ -3,28 +3,29 @@ package com.ru.tgra.assignment02;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
+import java.util.ArrayList;
+
 public class Cannon {
 	
 	ModelMatrix orientation;
 	Vector3D velocity;
 	
 	Box box;
-	CannonBall ball;
+	ArrayList<CannonBall> balls;
 	
 	public Cannon()
 	{
 		orientation = new ModelMatrix();
 		orientation.loadIdentityMatrix();
 		orientation.addTranslation(Gdx.graphics.getWidth() / 2, 60.0f, 0);
-		
 		velocity = new Vector3D(0, 0, 0);
+        balls = new ArrayList<CannonBall>();
 		
 		box = new Box();
 		box.x0 = -0.50f;
 		box.y0 = -0.50f;
 		box.x = 0.50f;
 		box.y = 0.50f;
-		ball = new CannonBall();
 	}
 	
 	public void update(float deltaTime)
@@ -38,36 +39,17 @@ public class Cannon {
 		}
 		
 		//The cannonball
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !ball.visible) {
-			ball.orientation = new ModelMatrix();
-			ball.orientation.loadIdentityMatrix();
-			ball.orientation.addTransformation(orientation.matrix);
-			ball.orientation.addTranslation(0, 50.0f, 0);
-			
-			ball.velocity = ball.orientation.getB();
-			ball.velocity.scale(200.0f);
-
-			ball.visible = true;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            balls.add(new CannonBall(orientation));
 		}
-
-		if(ball.visible) {
-			//The canon ball can be discarded by pressing 'Z'.
-			if(Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
-				ball.visible = false;
-			}
-			else {
-				ball.update(deltaTime);
-			}
-		}
-		
 	}
 	
-	public void display(int colorLoc)
+	public void display(int colorLoc, float deltaTime)
 	{
-		if(ball.visible) {
-			ball.display(colorLoc);
-		}
-		
+        for (CannonBall ball : balls){
+            ball.display(colorLoc, deltaTime);
+        }
+
 		drawCannon(colorLoc);
 	}
 	

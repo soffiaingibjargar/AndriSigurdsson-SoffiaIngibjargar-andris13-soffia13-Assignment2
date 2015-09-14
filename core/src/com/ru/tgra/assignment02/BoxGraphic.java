@@ -11,11 +11,8 @@ public class BoxGraphic {
 	ArrayList<Box> boxes;
 	boolean mouse = false;
 	
-	float x0;
-	float y0;
-	float x;
-	float y;
-	
+	private float x0, y0, x, y;
+
 	public BoxGraphic() 
 	{
 		orientation = new ModelMatrix();
@@ -28,7 +25,7 @@ public class BoxGraphic {
 	{
 		ModelMatrix.main.addTransformation(orientation.matrix);
 		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-			if(mouse == false) {
+			if(!mouse) {
 				mouse = true;
 				x0 = Gdx.input.getX();
 				y0 = Gdx.graphics.getHeight() - Gdx.input.getY() ;

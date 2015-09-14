@@ -6,8 +6,7 @@ public class Box {
 	public float x;
 	public float y;
 	
-	public Box(float x0, float y0, float x, float y)
-	{
+	public Box(float x0, float y0, float x, float y){
 		this.x0 = x0;
 		this.y0 = y0;
 		this.x = x;

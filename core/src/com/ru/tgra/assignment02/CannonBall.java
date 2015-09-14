@@ -6,7 +6,7 @@ public class CannonBall {
 	
 	public ModelMatrix orientation;
 	public Vector3D velocity;
-	public boolean visable = false;
+	public boolean visible = false;
 	
 	public CannonBall()
 	{

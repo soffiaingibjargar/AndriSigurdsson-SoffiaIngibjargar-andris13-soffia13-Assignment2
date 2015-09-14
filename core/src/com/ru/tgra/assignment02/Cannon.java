@@ -1,7 +1,5 @@
 package com.ru.tgra.assignment02;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
@@ -26,15 +24,15 @@ public class Cannon {
 	public void update(float deltaTime)
 	{
 		//Rotation for the cannon
-		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && orientation.getB().y > 0) {
+		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && orientation.getB().x > -1) {
 			orientation.addRotationZ(90.0f * deltaTime);
 		}
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && orientation.getB().y > 0) {
+		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && orientation.getB().x < 1) {
 			orientation.addRotationZ(-90.0f * deltaTime);
 		}
 		
 		//The cannonball
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && ball.visable == false) {
+		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && ball.visible == false) {
 			ball.orientation = new ModelMatrix();
 			ball.orientation.loadIdentityMatrix();
 			ball.orientation.addTransformation(orientation.matrix);
@@ -43,13 +41,13 @@ public class Cannon {
 			ball.velocity = ball.orientation.getB();
 			ball.velocity.scale(200.0f);
 
-			ball.visable = true;
+			ball.visible = true;
 		}
 
-		if(ball.visable == true) {
+		if(ball.visible == true) {
 			//The canon ball can be discarded by pressing 'Z'.
 			if(Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
-				ball.visable = false;
+				ball.visible = false;
 			}
 			else {
 				ball.update(deltaTime);
@@ -60,7 +58,7 @@ public class Cannon {
 	
 	public void display(int colorLoc)
 	{
-		if(ball.visable == true) {
+		if(ball.visible == true) {
 			ball.display(colorLoc);
 		}
 		

@@ -8,6 +8,7 @@ public class Cannon {
 	ModelMatrix orientation;
 	Vector3D velocity;
 	
+	Box box;
 	CannonBall ball;
 	
 	public Cannon()
@@ -18,6 +19,11 @@ public class Cannon {
 		
 		velocity = new Vector3D(0, 0, 0);
 		
+		box = new Box();
+		box.x0 = -0.50f;
+		box.y0 = -0.50f;
+		box.x = 0.50f;
+		box.y = 0.50f;
 		ball = new CannonBall();
 	}
 	
@@ -78,7 +84,7 @@ public class Cannon {
 		ModelMatrix.main.addScale(2.0f, 0.5f, 1);
 		ModelMatrix.main.addTranslation(0.0f, -0.9f, 0);
 		ModelMatrix.main.setShaderMatrix();
-		RectangleGraphic.drawSolidSquare(-0.50f, -0.50f, 0.50f, 0.50f);
+		RectangleGraphic.drawSolidSquare(box);
 		ModelMatrix.main.popMatrix();
 		
 		Gdx.gl.glUniform4f(colorLoc, 0.35f, 0.35f, 0.35f, 1);
@@ -86,7 +92,7 @@ public class Cannon {
 		ModelMatrix.main.addScale(0.4f, 2.5f, 1);
 		ModelMatrix.main.addTranslation(2.0f, -0.2f, 0);
 		ModelMatrix.main.setShaderMatrix();
-		RectangleGraphic.drawSolidSquare(-0.50f, -0.50f, 0.50f, 0.50f);
+		RectangleGraphic.drawSolidSquare(box);
 		ModelMatrix.main.popMatrix();
 		
 		Gdx.gl.glUniform4f(colorLoc, 0.35f, 0.35f, 0.35f, 1);
@@ -94,14 +100,14 @@ public class Cannon {
 		ModelMatrix.main.addScale(0.4f, 2.5f, 1);
 		ModelMatrix.main.addTranslation(-2.0f, -0.2f, 0);
 		ModelMatrix.main.setShaderMatrix();
-		RectangleGraphic.drawSolidSquare(-0.50f, -0.50f, 0.50f, 0.50f);
+		RectangleGraphic.drawSolidSquare(box);
 		ModelMatrix.main.popMatrix();
 		
 		Gdx.gl.glUniform4f(colorLoc, 0.412f, 0.412f, 0.412f, 1);
 		ModelMatrix.main.pushMatrix();
 		ModelMatrix.main.addScale(1.0f, 5.0f, 1);
 		ModelMatrix.main.setShaderMatrix();
-		RectangleGraphic.drawSolidSquare(-0.50f, -0.50f, 0.50f, 0.50f);
+		RectangleGraphic.drawSolidSquare(box);
 		ModelMatrix.main.popMatrix();
 		
 		

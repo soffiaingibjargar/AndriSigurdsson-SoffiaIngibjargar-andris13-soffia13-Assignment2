@@ -27,12 +27,12 @@ public class RectangleGraphic {
 		vertexBuffer.rewind();*/
 	}
 	
-	public static void drawSolidSquare(float x0, float y0, float x, float y) {
+	public static void drawSolidSquare(Box box) {
 		//VERTEX ARRAY IS FILLED HERE
-				float[] array = {x0, y0,
-								x0, y,
-								x, y,
-								x, y0};
+				float[] array = {box.x0, box.y0,
+								box.x0, box.y,
+								box.x, box.y,
+								box.x, box.y0};
 
 				vertexBuffer = BufferUtils.newFloatBuffer(8);
 				vertexBuffer.put(array);

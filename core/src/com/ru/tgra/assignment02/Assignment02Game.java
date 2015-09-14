@@ -26,8 +26,7 @@ public class Assignment02Game extends ApplicationAdapter {
 
 	private int colorLoc;
 	
-	//private ModelMatrix ModelMatrix.main;
-	
+	private BoxGraphic boxGraphic;
 	
 	private Box boxes;
 	private Cannon cannon;
@@ -98,6 +97,8 @@ public class Assignment02Game extends ApplicationAdapter {
 		ModelMatrix.main = new ModelMatrix();
 		ModelMatrix.main.loadIdentityMatrix();
 		
+		boxGraphic = new BoxGraphic();
+		
 	}
 	
 	
@@ -105,6 +106,7 @@ public class Assignment02Game extends ApplicationAdapter {
 	{
 		float deltaTime = Gdx.graphics.getDeltaTime();
 		
+		boxGraphic.update();
 		cannon.update(deltaTime);
 	}
 		
@@ -119,7 +121,7 @@ public class Assignment02Game extends ApplicationAdapter {
 		ModelMatrix.main.loadIdentityMatrix();
 		ModelMatrix.main.setShaderMatrix(modelMatrixLoc);
 		
-		
+		boxGraphic.display(colorLoc);
 		cannon.display(colorLoc);
 		
 	}

@@ -1,10 +1,10 @@
 package com.ru.tgra.assignment02;
 
 public class Box {
-	private float x0;
-	private float y0;
-	private float x;
-	private float y;
+	public float x0;
+	public float y0;
+	public float x;
+	public float y;
 	
 	public void create(float x0, float y0, float x, float y)
 	{

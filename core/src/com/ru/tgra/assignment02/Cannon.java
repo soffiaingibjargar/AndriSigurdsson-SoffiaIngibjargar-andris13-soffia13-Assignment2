@@ -6,13 +6,10 @@ import com.badlogic.gdx.Input;
 import java.util.ArrayList;
 
 public class Cannon {
-	
 	ModelMatrix orientation;
 	Vector3D velocity;
-	
 	Box box;
 	ArrayList<CannonBall> balls;
-	
 	public Cannon()
 	{
 		orientation = new ModelMatrix();
@@ -49,7 +46,6 @@ public class Cannon {
         for (CannonBall ball : balls){
             ball.display(colorLoc, deltaTime);
         }
-
 		drawCannon(colorLoc);
 	}
 	

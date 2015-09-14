@@ -24,15 +24,15 @@ public class Cannon {
 	public void update(float deltaTime)
 	{
 		//Rotation for the cannon
-		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && orientation.getB().x > -1) {
+		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && (orientation.getB().y > 0 || orientation.getB().x > 0)) {
 			orientation.addRotationZ(90.0f * deltaTime);
 		}
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && orientation.getB().x < 1) {
+		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && (orientation.getB().y > 0 || orientation.getB().x < 0)) {
 			orientation.addRotationZ(-90.0f * deltaTime);
 		}
 		
 		//The cannonball
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && ball.visible == false) {
+		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !ball.visible) {
 			ball.orientation = new ModelMatrix();
 			ball.orientation.loadIdentityMatrix();
 			ball.orientation.addTransformation(orientation.matrix);
@@ -44,7 +44,7 @@ public class Cannon {
 			ball.visible = true;
 		}
 
-		if(ball.visible == true) {
+		if(ball.visible) {
 			//The canon ball can be discarded by pressing 'Z'.
 			if(Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
 				ball.visible = false;
@@ -58,7 +58,7 @@ public class Cannon {
 	
 	public void display(int colorLoc)
 	{
-		if(ball.visible == true) {
+		if(ball.visible) {
 			ball.display(colorLoc);
 		}
 		

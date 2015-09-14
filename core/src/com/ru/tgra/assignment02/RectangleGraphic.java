@@ -15,6 +15,7 @@ public class RectangleGraphic {
 
 	public static void create(int vertexPointer) {
 		RectangleGraphic.vertexPointer = vertexPointer;
+
 		vertexBuffer = BufferUtils.newFloatBuffer(8);
 	}
 	

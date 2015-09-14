@@ -28,11 +28,8 @@ public class Assignment02Game extends ApplicationAdapter {
 	
 	//private ModelMatrix ModelMatrix.main;
 	
-	private float cicle_x = 200.0f;
-	private float cicle_y = 200.0f;
 	
-	private float angle = 0.0f;
-	
+	private Box boxes;
 	private Cannon cannon;
 	
 	@Override
@@ -93,13 +90,14 @@ public class Assignment02Game extends ApplicationAdapter {
 		//VERTEX ARRAY IS FILLED HERE
 		RectangleGraphic.create(positionLoc);
 		CircleGraphic.create(positionLoc);
+		
 		//SincGraphic.create(positionLoc);
 		//CoordFrameGraphic.create(positionLoc);
+		boxes = new Box();
 		cannon = new Cannon();
 		ModelMatrix.main = new ModelMatrix();
 		ModelMatrix.main.loadIdentityMatrix();
 		
-		//spaceship1 = new Spaceship();
 	}
 	
 	
@@ -120,6 +118,7 @@ public class Assignment02Game extends ApplicationAdapter {
 		
 		ModelMatrix.main.loadIdentityMatrix();
 		ModelMatrix.main.setShaderMatrix(modelMatrixLoc);
+		
 		
 		cannon.display(colorLoc);
 		

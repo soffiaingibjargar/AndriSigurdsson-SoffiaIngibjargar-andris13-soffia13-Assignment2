@@ -14,12 +14,6 @@ public class LineGraphic {
     {
         orientation = new ModelMatrix();
         orientation.loadIdentityMatrix();
-        box = new Box();
-        box.x0 = 200.0f;
-        box.y0 = 200.0f;
-        box.x = 300.0f;
-        box.y = 300.0f;
-        boxes = new ArrayList<Box>();
     }
 
     public void update()

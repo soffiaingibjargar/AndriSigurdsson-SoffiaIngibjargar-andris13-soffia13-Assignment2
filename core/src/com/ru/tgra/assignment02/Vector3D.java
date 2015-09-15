@@ -1,5 +1,7 @@
 package com.ru.tgra.assignment02;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Vector3D {
 
 	public float x;
@@ -27,4 +29,8 @@ public class Vector3D {
 		y += v2.y;
 		z += v2.z;
 	}
+
+    public Vector2 cast2D(){
+        return new Vector2(x, y);
+    }
 }

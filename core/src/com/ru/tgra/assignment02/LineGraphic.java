@@ -9,18 +9,19 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.BufferUtils;
 
 public class LineGraphic {
-    ModelMatrix orientation;
-    ArrayList<Line> lines;
-    boolean mouse = false;
+    private ModelMatrix orientation;
+    private ArrayList<Line> lines;
+    private boolean mouse = false;
     private static FloatBuffer vertexBuffer;
     private static int vertexPointer;
-    float x, y, x0, y0;
+    private float x, y, x0, y0;
 
-    public LineGraphic(){
+    public LineGraphic(int vertexPointer){
         orientation = new ModelMatrix();
         orientation.loadIdentityMatrix();
         lines = new ArrayList<Line>();
         vertexBuffer = BufferUtils.newFloatBuffer(4);
+        LineGraphic.vertexPointer = vertexPointer;
     }
 
     public void update(){
@@ -35,13 +36,13 @@ public class LineGraphic {
             y = Gdx.graphics.getHeight() - Gdx.input.getY();
         }
 
-        if(!Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && mouse == true) {
+        if(!Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && mouse) {
             mouse = false;
             Line line = new Line(x0, y0, x, y);
             lines.add(line);
-
         }
     }
+
 
     private void draw(float x, float y, float x0, float y0){
         float[] array = {x, y, x0, y0};
@@ -56,12 +57,16 @@ public class LineGraphic {
         ModelMatrix.main.pushMatrix();
         Gdx.gl.glUniform4f(colorLoc, 0.340f, 0.378f, 0.576f, 1);
         for (Line line: lines){
-            draw(line.u.x, line.u.y, line.v.x, line.v.y);
+            draw(line.u().x, line.u().y, line.v().x, line.v().y);
         }
         if (mouse){
             draw(x, y, x0, y0);
         }
 
         ModelMatrix.main.popMatrix();
+    }
+
+    public ArrayList<Line> getLines(){
+        return lines;
     }
 }

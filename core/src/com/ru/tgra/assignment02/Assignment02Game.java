@@ -28,6 +28,7 @@ public class Assignment02Game extends ApplicationAdapter {
 	
 	private BoxGraphic boxGraphic;
     private LineGraphic lineGraphic;
+    private CircleGraphic circleGraphic;
 	
 	private Box boxes;
 	private Cannon cannon;
@@ -98,7 +99,8 @@ public class Assignment02Game extends ApplicationAdapter {
 		ModelMatrix.main.loadIdentityMatrix();
 		
 		boxGraphic = new BoxGraphic();
-		lineGraphic = new LineGraphic();
+        circleGraphic = new CircleGraphic();
+		lineGraphic = new LineGraphic(positionLoc);
 		
 	}
 	
@@ -127,7 +129,7 @@ public class Assignment02Game extends ApplicationAdapter {
 		
 		boxGraphic.display(colorLoc);
         lineGraphic.display(colorLoc);
-		cannon.display(colorLoc, deltaTime);
+		cannon.display(colorLoc, deltaTime, circleGraphic, boxGraphic, lineGraphic);
 		
 	}
 

@@ -35,7 +35,7 @@ public class ModelMatrix extends Matrix {
 	{
 		return new Point3D(matrix.get(12), matrix.get(13), matrix.get(14));
 	}
-	
+
 	public void addTranslation(float Tx, float Ty, float Tz)
 	{
 		matrix.put(12, matrix.get(0)*Tx + matrix.get(4)*Ty + matrix.get(8)*Tz + matrix.get(12));

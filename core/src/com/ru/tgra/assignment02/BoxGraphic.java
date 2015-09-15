@@ -9,16 +9,22 @@ public class BoxGraphic {
 
 	ModelMatrix orientation;
 	ArrayList<Box> boxes;
+    ArrayList<Line> lines;
 	boolean mouse = false;
 	
 	private float x0, y0, x, y;
 
-	public BoxGraphic() 
+
+	public BoxGraphic()
 	{
 		orientation = new ModelMatrix();
 		orientation.loadIdentityMatrix();
-
+        lines = new ArrayList<Line>();
 		boxes = new ArrayList<Box>();
+        Box box = new Box(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        for (Line line : box.getLines()){
+            lines.add(line);
+        }
 	}
 	
 	public void update()
@@ -34,9 +40,12 @@ public class BoxGraphic {
 			y = Gdx.graphics.getHeight() - Gdx.input.getY();
 		}
 		
-		if(!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mouse == true) {
+		if(!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mouse) {
 			mouse = false;
 			Box box = new Box(x0, y0, x, y);
+            for (Line line : box.getLines()){
+                lines.add(line);
+            }
 			boxes.add(box);
 			
 		}
@@ -51,10 +60,14 @@ public class BoxGraphic {
 		for(Box box : boxes){
 			RectangleGraphic.drawSolidSquare(box);
 		}
-		if(mouse == true) {
+		if(mouse) {
 			RectangleGraphic.drawSolidSquare(new Box(x0, y0, x, y));
 		}
 		
 		ModelMatrix.main.popMatrix();
 	}
+
+    public ArrayList<Line> getLines(){
+        return lines;
+    }
 }

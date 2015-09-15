@@ -17,6 +17,14 @@ public class Line {
         return new Vector2(u);
     }
 
+    public void scale(float x, float y){
+        u.x *= x;
+        v.x *= x;
+        u.y *= y;
+        v.y *= y;
+
+    }
+
     public Vector2 v(){
         return new Vector2(v);
     }

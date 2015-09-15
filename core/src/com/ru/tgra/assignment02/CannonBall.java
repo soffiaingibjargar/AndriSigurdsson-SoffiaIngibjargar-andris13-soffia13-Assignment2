@@ -11,7 +11,7 @@ public class CannonBall {
 	public Vector3D velocity;
 	public boolean live;
 
-	public CannonBall(ModelMatrix orientation)
+	public CannonBall(ModelMatrix orientation, float power)
 	{
 		this.orientation = new ModelMatrix();
 		this.orientation.loadIdentityMatrix();
@@ -19,16 +19,17 @@ public class CannonBall {
 		this.orientation.addTranslation(0, 50.0f, 0);
 		this.live = true;
 		velocity = orientation.getB();
-		velocity.scale(200.0f);
+		velocity.scale(600.0f * power);
 	}
 	
 	public void update(float deltaTime, CircleGraphic circleGraph, BoxGraphic boxGraph, LineGraphic lineGraph)
 	{
+        velocity.y -= 8;
         collisions(deltaTime, circleGraph, boxGraph, lineGraph);
 		orientation.AddTranslationBaseCoords(velocity.x * deltaTime, velocity.y * deltaTime, 0);
 	}
 	
-	public void display(int colorLoc, float deltaTime, CircleGraphic circleGraph, BoxGraphic boxGraph, LineGraphic lineGraph, Goal goal)
+	public int display(int colorLoc, float deltaTime, CircleGraphic circleGraph, BoxGraphic boxGraph, LineGraphic lineGraph, Goal goal)
 	{
 		ModelMatrix.main.pushMatrix();
         update(deltaTime, circleGraph, boxGraph, lineGraph);
@@ -38,7 +39,7 @@ public class CannonBall {
 		ModelMatrix.main.setShaderMatrix();
 		CircleGraphic.drawSolidCircle();
 		ModelMatrix.main.popMatrix();
-		score(goal);
+		return score(goal);
 	}
 
     private void collide(float deltaTime, ArrayList<Line> lines){
@@ -66,6 +67,7 @@ public class CannonBall {
             float var = 2 * c.dot(n)/n.dot(n);
             c.sub(n.scl(var, var));
             velocity = new Vector3D(c.x, c.y, 0);
+            velocity.scale(0.8f);
 
             if (deltaTime > 1.0e-10f ){
                 collide(deltaTime - minHitValue, lines);
@@ -80,14 +82,16 @@ public class CannonBall {
         collide(deltaTime, all);
     }
     
-    public void score(Goal goal)
+    public int score(Goal goal)
 	{
 		if(goal.on) {
 			if(Math.pow((goal.x - orientation.getOrigin().x),2) + Math.pow((orientation.getOrigin().y - goal.y),2) <= Math.pow((9.0f + 40.0f),2)){
-				goal.win = true;
+                goal.win();
 				live = false;
+                return 1;
 			}
 		}
+        return 0;
 	}
 
 }

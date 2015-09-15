@@ -21,10 +21,8 @@ public class BoxGraphic {
 		orientation.loadIdentityMatrix();
         lines = new ArrayList<Line>();
 		boxes = new ArrayList<Box>();
-        Box box = new Box(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        for (Line line : box.getLines()){
-            lines.add(line);
-        }
+        Box box = new Box(-1, -1, Gdx.graphics.getWidth() + 1, Gdx.graphics.getHeight() + 1);
+        for (Line line : box.getLines()) lines.add(line);
 	}
 	
 	public void update()
@@ -43,9 +41,7 @@ public class BoxGraphic {
 		if(!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mouse) {
 			mouse = false;
 			Box box = new Box(x0, y0, x, y);
-            for (Line line : box.getLines()){
-                lines.add(line);
-            }
+            for (Line line : box.getLines()) lines.add(line);
 			boxes.add(box);
 			
 		}

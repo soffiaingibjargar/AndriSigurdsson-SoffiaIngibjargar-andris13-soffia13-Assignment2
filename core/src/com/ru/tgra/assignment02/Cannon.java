@@ -37,10 +37,15 @@ public class Cannon {
 		}
 	}
 	
-	public void display(int colorLoc, float deltaTime, CircleGraphic circleGraph, BoxGraphic boxGraph, LineGraphic lineGraph)
+	public void display(int colorLoc, float deltaTime, CircleGraphic circleGraph, BoxGraphic boxGraph, LineGraphic lineGraph, Goal goal)
 	{
         for (CannonBall ball : balls){
-            ball.display(colorLoc, deltaTime, circleGraph, boxGraph, lineGraph );
+        	if(ball.live){
+        		ball.display(colorLoc, deltaTime, circleGraph, boxGraph, lineGraph, goal);
+        	}
+        	else{
+        		ball = null;
+        	}
         }
 		drawCannon(colorLoc);
 	}

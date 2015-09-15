@@ -9,6 +9,7 @@ public class CannonBall {
 	
 	public ModelMatrix orientation;
 	public Vector3D velocity;
+	public boolean live;
 
 	public CannonBall(ModelMatrix orientation)
 	{
@@ -16,6 +17,7 @@ public class CannonBall {
 		this.orientation.loadIdentityMatrix();
 		this.orientation.addTransformation(orientation.matrix);
 		this.orientation.addTranslation(0, 50.0f, 0);
+		this.live = true;
 		velocity = orientation.getB();
 		velocity.scale(200.0f);
 	}
@@ -26,7 +28,7 @@ public class CannonBall {
 		orientation.AddTranslationBaseCoords(velocity.x * deltaTime, velocity.y * deltaTime, 0);
 	}
 	
-	public void display(int colorLoc, float deltaTime, CircleGraphic circleGraph, BoxGraphic boxGraph, LineGraphic lineGraph)
+	public void display(int colorLoc, float deltaTime, CircleGraphic circleGraph, BoxGraphic boxGraph, LineGraphic lineGraph, Goal goal)
 	{
 		ModelMatrix.main.pushMatrix();
         update(deltaTime, circleGraph, boxGraph, lineGraph);
@@ -36,6 +38,7 @@ public class CannonBall {
 		ModelMatrix.main.setShaderMatrix();
 		CircleGraphic.drawSolidCircle();
 		ModelMatrix.main.popMatrix();
+		score(goal);
 	}
 
     private void collide(float deltaTime, ArrayList<Line> lines){
@@ -50,7 +53,6 @@ public class CannonBall {
             float tHit = n.dot((B.sub(A)))/n.dot(c);
             c.scl(tHit, tHit);
             Vector2 pHit = A.add(c);
-            //System.out.printf("Phit %f %f,  Thit %f\n", pHit.x, pHit.y, tHit);
             if (tHit - deltaTime <= 1.0e-8f && tHit > 0){
                 if(line.isBetween(pHit)){
                     minHitValue = Math.min(tHit, minHitValue);
@@ -77,5 +79,15 @@ public class CannonBall {
         all.addAll(boxGraph.getLines());
         collide(deltaTime, all);
     }
+    
+    public void score(Goal goal)
+	{
+		if(goal.on) {
+			if(Math.pow((goal.x - orientation.getOrigin().x),2) + Math.pow((orientation.getOrigin().y - goal.y),2) <= Math.pow((9.0f + 40.0f),2)){
+				goal.win = true;
+				live = false;
+			}
+		}
+	}
 
 }

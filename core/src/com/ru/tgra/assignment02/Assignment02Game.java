@@ -30,8 +30,8 @@ public class Assignment02Game extends ApplicationAdapter {
     private LineGraphic lineGraphic;
     private CircleGraphic circleGraphic;
 	
-	private Box boxes;
 	private Cannon cannon;
+	private Goal goal;
 	
 	@Override
 	public void create () {
@@ -95,6 +95,7 @@ public class Assignment02Game extends ApplicationAdapter {
 		//SincGraphic.create(positionLoc);
 		//CoordFrameGraphic.create(positionLoc);
 		cannon = new Cannon();
+		goal = new Goal();
 		ModelMatrix.main = new ModelMatrix();
 		ModelMatrix.main.loadIdentityMatrix();
 		
@@ -126,10 +127,10 @@ public class Assignment02Game extends ApplicationAdapter {
 		ModelMatrix.main.setShaderMatrix(modelMatrixLoc);
 		float deltaTime = Gdx.graphics.getDeltaTime();
 
-		
 		boxGraphic.display(colorLoc);
         lineGraphic.display(colorLoc);
-		cannon.display(colorLoc, deltaTime, circleGraphic, boxGraphic, lineGraphic);
+		goal.display(colorLoc);
+		cannon.display(colorLoc, deltaTime, circleGraphic, boxGraphic, lineGraphic, goal);
 		
 	}
 

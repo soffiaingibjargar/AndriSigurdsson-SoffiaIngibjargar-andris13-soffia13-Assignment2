@@ -3,7 +3,7 @@ package com.ru.tgra.assignment02;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 
 import java.nio.FloatBuffer;
@@ -11,6 +11,7 @@ import java.nio.FloatBuffer;
 import com.badlogic.gdx.utils.BufferUtils;
 
 public class Assignment02Game extends ApplicationAdapter {
+	Sound boom;
 
 	private FloatBuffer modelMatrixBuffer;
 	private FloatBuffer projectionMatrix;
@@ -35,7 +36,8 @@ public class Assignment02Game extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-
+		boom = Gdx.audio.newSound(Gdx.files.internal("/home/soffia/HR/Tölvugrafík/workspace/Assignment02/AndriSigurdsson-SoffiaIngibjargar-andris13-soffia13-Assignment2/core/assets/data/Gunshot.mp3"));
+		
 		Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		String vertexShaderString;
@@ -92,8 +94,6 @@ public class Assignment02Game extends ApplicationAdapter {
 		RectangleGraphic.create(positionLoc);
 		CircleGraphic.create(positionLoc);
 		
-		//SincGraphic.create(positionLoc);
-		//CoordFrameGraphic.create(positionLoc);
 		cannon = new Cannon();
 		goal = new Goal();
 		ModelMatrix.main = new ModelMatrix();
@@ -112,7 +112,7 @@ public class Assignment02Game extends ApplicationAdapter {
 		
 		boxGraphic.update();
         lineGraphic.update();
-		cannon.update(deltaTime);
+		cannon.update(deltaTime, boom);
 	}
 		
 	
@@ -144,43 +144,6 @@ public class Assignment02Game extends ApplicationAdapter {
 
 	}
 
-
-	private void clearModelMatrix()
-	{
-		modelMatrixBuffer.put(0, 1.0f);
-		modelMatrixBuffer.put(1, 0.0f);
-		modelMatrixBuffer.put(2, 0.0f);
-		modelMatrixBuffer.put(3, 0.0f);
-		modelMatrixBuffer.put(4, 0.0f);
-		modelMatrixBuffer.put(5, 1.0f);
-		modelMatrixBuffer.put(6, 0.0f);
-		modelMatrixBuffer.put(7, 0.0f);
-		modelMatrixBuffer.put(8, 0.0f);
-		modelMatrixBuffer.put(9, 0.0f);
-		modelMatrixBuffer.put(10, 1.0f);
-		modelMatrixBuffer.put(11, 0.0f);
-		modelMatrixBuffer.put(12, 0.0f);
-		modelMatrixBuffer.put(13, 0.0f);
-		modelMatrixBuffer.put(14, 0.0f);
-		modelMatrixBuffer.put(15, 1.0f);
-
-		Gdx.gl.glUniformMatrix4fv(modelMatrixLoc, 1, false, modelMatrixBuffer);
-	}
-	private void setModelMatrixTranslation(float xTranslate, float yTranslate)
-	{
-		modelMatrixBuffer.put(12, xTranslate);
-		modelMatrixBuffer.put(13, yTranslate);
-
-		Gdx.gl.glUniformMatrix4fv(modelMatrixLoc, 1, false, modelMatrixBuffer);
-	}
-	private void setModelMatrixScale(float xScale, float yScale)
-	{
-		modelMatrixBuffer.put(0, xScale);
-		modelMatrixBuffer.put(5, yScale);
-
-		Gdx.gl.glUniformMatrix4fv(modelMatrixLoc, 1, false, modelMatrixBuffer);
-	}
-	
 	private void OrthographicProjection2D(float left, float right, float bottom, float top) {
 		
 		float[] pm = new float[16];

@@ -51,7 +51,7 @@ public class Goal {
 					Gdx.gl.glUniform4f(colorLoc, rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1);
                     wintime--;
 				} else {
-                    Gdx.gl.glUniform4f(colorLoc, 0.780f, 0.082f, 0.522f, 1);
+                    Gdx.gl.glUniform4f(colorLoc, 0.196f, 0.804f, 0.196f, 1);
                 }
 
                 if (wintime == 0 && win){

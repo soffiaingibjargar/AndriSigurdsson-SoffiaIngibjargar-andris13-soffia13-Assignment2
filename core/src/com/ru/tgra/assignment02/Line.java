@@ -29,7 +29,6 @@ public class Line {
         return new Vector2(v);
     }
 
-
     public Vector2 getEdge(){
         return new Vector2(u).sub(v);
     }

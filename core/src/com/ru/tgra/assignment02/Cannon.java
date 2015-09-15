@@ -2,6 +2,7 @@ package com.ru.tgra.assignment02;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,6 @@ public class Cannon {
 	private ModelMatrix orientation;
     private int score;
     private int scoreFive;
-	private Vector3D velocity;
 	private Box box;
 	private ArrayList<CannonBall> balls;
     private float power;
@@ -22,14 +22,13 @@ public class Cannon {
 		orientation = new ModelMatrix();
 		orientation.loadIdentityMatrix();
 		orientation.addTranslation(Gdx.graphics.getWidth() / 2, 60.0f, 0);
-		velocity = new Vector3D(0, 0, 0);
         balls = new ArrayList<CannonBall>();
         power = 0.0f;
         charging = false;
 		box = new Box(-0.50f, -0.50f, 0.50f, 0.50f);
 	}
 	
-	public void update(float deltaTime)
+	public void update(float deltaTime, Sound boom)
 	{
 		//Rotation for the cannon
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && (orientation.getB().y > 0 || orientation.getB().x > 0)) {
@@ -47,6 +46,7 @@ public class Cannon {
 		} else if (charging){
             charging = false;
             balls.add(new CannonBall(orientation, power));
+			boom.play();
             power = 0.0f;
         }
 

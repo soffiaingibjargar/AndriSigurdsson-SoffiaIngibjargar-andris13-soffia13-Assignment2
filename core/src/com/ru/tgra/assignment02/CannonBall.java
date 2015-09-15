@@ -38,12 +38,10 @@ public class CannonBall {
 		ModelMatrix.main.popMatrix();
 	}
 
-    private void collisions(float deltaTime, CircleGraphic circleGraph, BoxGraphic boxGraph, LineGraphic lineGraph){
+    private void collide(float deltaTime, ArrayList<Line> lines){
         float minHitValue = Float.MAX_VALUE;
         Line minLine = null;
-        ArrayList<Line> all = new ArrayList<Line>(lineGraph.getLines());
-        all.addAll(boxGraph.getLines());
-        for (Line line : all){
+        for (Line line : lines){
             Vector2 B = line.u();
             Vector2 n = line.getNormal();
             Point3D origin = orientation.getOrigin();
@@ -53,7 +51,7 @@ public class CannonBall {
             c.scl(tHit, tHit);
             Vector2 pHit = A.add(c);
             //System.out.printf("Phit %f %f,  Thit %f\n", pHit.x, pHit.y, tHit);
-            if (tHit - deltaTime <= 0 && tHit >= 0){
+            if (tHit - deltaTime <= 1.0e-8f && tHit > 0){
                 if(line.isBetween(pHit)){
                     minHitValue = Math.min(tHit, minHitValue);
                     minLine = line;
@@ -66,8 +64,18 @@ public class CannonBall {
             float var = 2 * c.dot(n)/n.dot(n);
             c.sub(n.scl(var, var));
             velocity = new Vector3D(c.x, c.y, 0);
+
+            if (deltaTime > 1.0e-10f ){
+                collide(deltaTime - minHitValue, lines);
+            }
         }
 
+    }
+
+    private void collisions(float deltaTime, CircleGraphic circleGraph, BoxGraphic boxGraph, LineGraphic lineGraph){
+        ArrayList<Line> all = new ArrayList<Line>(lineGraph.getLines());
+        all.addAll(boxGraph.getLines());
+        collide(deltaTime, all);
     }
 
 }
